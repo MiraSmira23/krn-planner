@@ -25,7 +25,7 @@ export default function Calendar({
 }) {
   const start = parseDate(event.window_start)
   const end = parseDate(event.window_end)
-  const weekendOnly = event.type === 'weekend'
+  const weekendOnly = event.type === 'weekend' || event.weekend_only
 
   // Allowed navigation range, expressed as year*12 + month.
   const minIdx = start.getFullYear() * 12 + start.getMonth()
