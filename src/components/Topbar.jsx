@@ -8,6 +8,7 @@ export default function Topbar({ eventTitle, right }) {
     >
       <div className="flex items-center gap-3">
         <Link to="/dashboard" className="text-2xl font-semibold tracking-tight">
+          <span className="mr-1.5" role="img" aria-label="syringe">💉</span>
           <span className="text-white">KRN</span>
           <span className="text-[#a78bfa]"> planner</span>
         </Link>
