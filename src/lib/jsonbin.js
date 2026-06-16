@@ -7,7 +7,7 @@ const EMPTY = { events: {} }
 export async function readData() {
   try {
     const res = await fetch(`${BASE_URL}/latest`, {
-      headers: { 'X-Master-Key': API_KEY },
+      headers: { 'X-Access-Key': API_KEY },
     })
     if (!res.ok) throw new Error(`JSONBin read failed: ${res.status}`)
     const json = await res.json()
@@ -27,7 +27,7 @@ export async function writeData(data) {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
-      'X-Master-Key': API_KEY,
+      'X-Access-Key': API_KEY,
     },
     body: JSON.stringify(data),
   })
