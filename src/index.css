@@ -1,111 +1,155 @@
+@import 'tailwindcss';
+@import 'react-day-picker/style.css';
+
 :root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
-
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
-
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
-  color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
+  font-family: 'Inter', system-ui, sans-serif;
+  font-weight: 400;
+  color-scheme: dark;
+  color: #e8e6f0;
+  background: #0f0f11;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-  @media (max-width: 1024px) {
-    font-size: 16px;
-  }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
-  }
-
-  #social .button-icon {
-    filter: invert(1) brightness(2);
-  }
-}
-
-body {
-  margin: 0;
-}
-
+html,
+body,
 #root {
-  width: 1126px;
-  max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  border-inline: 1px solid var(--border);
+  margin: 0;
   min-height: 100svh;
-  display: flex;
-  flex-direction: column;
+  background: #0f0f11;
+  color: #e8e6f0;
+}
+
+* {
   box-sizing: border-box;
 }
 
-h1,
-h2 {
-  font-family: var(--heading);
-  font-weight: 500;
-  color: var(--text-h);
+button {
+  font-family: inherit;
+  font-weight: 400;
+  cursor: pointer;
 }
 
-h1 {
-  font-size: 56px;
-  letter-spacing: -1.68px;
-  margin: 32px 0;
-  @media (max-width: 1024px) {
-    font-size: 36px;
-    margin: 20px 0;
+input {
+  font-family: inherit;
+}
+
+/* ---------- Animations ---------- */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
-h2 {
-  font-size: 24px;
-  line-height: 118%;
-  letter-spacing: -0.24px;
-  margin: 0 0 8px;
-  @media (max-width: 1024px) {
-    font-size: 20px;
+
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
   }
 }
-p {
+
+.fade-up {
+  animation: fadeUp 0.25s ease both;
+}
+.fade-up-delay {
+  animation: fadeUp 0.25s 0.07s ease both;
+}
+
+/* ---------- react-day-picker overrides ---------- */
+.rdp-krn {
+  --rdp-accent-color: #7c6fe0;
+  --rdp-day-width: 40px;
+  --rdp-day-height: 40px;
   margin: 0;
+  color: #e8e6f0;
 }
 
-code,
-.counter {
-  font-family: var(--mono);
-  display: inline-flex;
-  border-radius: 4px;
-  color: var(--text-h);
+.rdp-krn .rdp-month_caption {
+  color: #b8b4d0;
+  font-weight: 500;
+  font-size: 14px;
+  text-transform: capitalize;
 }
 
-code {
-  font-size: 15px;
-  line-height: 135%;
-  padding: 4px 8px;
-  background: var(--code-bg);
+.rdp-krn .rdp-weekday {
+  color: #3e3c52;
+  font-weight: 400;
+  font-size: 11px;
+  text-transform: lowercase;
+}
+
+.rdp-krn .rdp-day_button {
+  width: 38px;
+  height: 38px;
+  border-radius: 9px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: #e8e6f0;
+  font-weight: 400;
+  font-size: 14px;
+  transition:
+    background 0.12s ease,
+    border-color 0.12s ease;
+  animation: popIn 0.18s ease both;
+}
+
+.rdp-krn .rdp-day_button:hover {
+  background: #1c1c2c;
+  border-color: #2a2838;
+}
+
+.rdp-krn .rdp-day.rdp-disabled .rdp-day_button,
+.rdp-krn .rdp-day.rdp-outside .rdp-day_button {
+  color: #252330;
+  cursor: default;
+}
+
+.rdp-krn .rdp-day.rdp-disabled .rdp-day_button:hover,
+.rdp-krn .rdp-day.rdp-outside .rdp-day_button:hover {
+  background: transparent;
+  border-color: transparent;
+}
+
+.rdp-krn .day-great .rdp-day_button {
+  background: #0f2a1a;
+  border-color: #22c55e;
+  color: #e8e6f0;
+}
+.rdp-krn .day-ok .rdp-day_button {
+  background: #1c1810;
+  border-color: #806010;
+  color: #e8e6f0;
+}
+.rdp-krn .day-hardno .rdp-day_button {
+  background: #1c1018;
+  border-color: #803040;
+  color: #e8e6f0;
+}
+.rdp-krn .day-focused .rdp-day_button {
+  border-color: #a78bfa;
+}
+
+.rdp-krn .rdp-button_previous,
+.rdp-krn .rdp-button_next {
+  color: #b8b4d0;
+  border-radius: 7px;
+}
+.rdp-krn .rdp-button_previous:hover,
+.rdp-krn .rdp-button_next:hover {
+  background: #1a1a24;
+  color: #a78bfa;
+}
+.rdp-krn .rdp-chevron {
+  fill: currentColor;
 }
