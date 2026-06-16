@@ -1,8 +1,8 @@
 @import 'tailwindcss';
-@import 'react-day-picker/style.css';
 
 :root {
   font-family: 'Inter', system-ui, sans-serif;
+  font-size: 18px;
   font-weight: 400;
   color-scheme: dark;
   color: #e8e6f0;
@@ -66,90 +66,18 @@ input {
   animation: fadeUp 0.25s 0.07s ease both;
 }
 
-/* ---------- react-day-picker overrides ---------- */
-.rdp-krn {
-  --rdp-accent-color: #7c6fe0;
-  --rdp-day-width: 40px;
-  --rdp-day-height: 40px;
-  margin: 0;
-  color: #e8e6f0;
+/* ---------- Calendar ---------- */
+.day-cell {
+  animation: popIn 0.16s ease both;
 }
 
-.rdp-krn .rdp-month_caption {
-  color: #b8b4d0;
-  font-weight: 500;
-  font-size: 14px;
-  text-transform: capitalize;
+.pop-in {
+  animation: popIn 0.14s ease both;
+  transform-origin: top;
 }
 
-.rdp-krn .rdp-weekday {
-  color: #3e3c52;
-  font-weight: 400;
-  font-size: 11px;
-  text-transform: lowercase;
-}
-
-.rdp-krn .rdp-day_button {
-  width: 38px;
-  height: 38px;
-  border-radius: 9px;
-  border: 1px solid transparent;
-  background: transparent;
-  color: #e8e6f0;
-  font-weight: 400;
-  font-size: 14px;
-  transition:
-    background 0.12s ease,
-    border-color 0.12s ease;
-  animation: popIn 0.18s ease both;
-}
-
-.rdp-krn .rdp-day_button:hover {
+/* Hover only on enabled, not-yet-selected days (selected days keep their tint). */
+.day-cell.day-hoverable:hover {
   background: #1c1c2c;
   border-color: #2a2838;
-}
-
-.rdp-krn .rdp-day.rdp-disabled .rdp-day_button,
-.rdp-krn .rdp-day.rdp-outside .rdp-day_button {
-  color: #252330;
-  cursor: default;
-}
-
-.rdp-krn .rdp-day.rdp-disabled .rdp-day_button:hover,
-.rdp-krn .rdp-day.rdp-outside .rdp-day_button:hover {
-  background: transparent;
-  border-color: transparent;
-}
-
-.rdp-krn .day-great .rdp-day_button {
-  background: #0f2a1a;
-  border-color: #22c55e;
-  color: #e8e6f0;
-}
-.rdp-krn .day-ok .rdp-day_button {
-  background: #1c1810;
-  border-color: #806010;
-  color: #e8e6f0;
-}
-.rdp-krn .day-hardno .rdp-day_button {
-  background: #1c1018;
-  border-color: #803040;
-  color: #e8e6f0;
-}
-.rdp-krn .day-focused .rdp-day_button {
-  border-color: #a78bfa;
-}
-
-.rdp-krn .rdp-button_previous,
-.rdp-krn .rdp-button_next {
-  color: #b8b4d0;
-  border-radius: 7px;
-}
-.rdp-krn .rdp-button_previous:hover,
-.rdp-krn .rdp-button_next:hover {
-  background: #1a1a24;
-  color: #a78bfa;
-}
-.rdp-krn .rdp-chevron {
-  fill: currentColor;
 }

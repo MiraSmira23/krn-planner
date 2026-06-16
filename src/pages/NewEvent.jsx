@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { v4 as uuidv4 } from 'uuid'
 import Topbar from '../components/Topbar'
+import RangeCalendar from '../components/RangeCalendar'
 import { createEvent } from '../lib/jsonbin'
 import { EVENT_TYPES } from '../lib/constants'
 import { toKey } from '../lib/dates'
@@ -17,7 +18,7 @@ export default function NewEvent() {
   const [title, setTitle] = useState('')
   const [type, setType] = useState('single_day')
   const [durationDays, setDurationDays] = useState(3)
-  const [windowStart, setWindowStart] = useState(today)
+  const [windowStart, setWindowStart] = useState('')
   const [windowEnd, setWindowEnd] = useState('')
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState('')
@@ -109,25 +110,17 @@ export default function NewEvent() {
             </div>
           )}
 
-          <div className="grid grid-cols-2 gap-3">
-            <div>
-              <label className={labelCls}>Okno od</label>
-              <input
-                type="date"
-                value={windowStart}
-                onChange={(e) => setWindowStart(e.target.value)}
-                className={inputCls}
-              />
-            </div>
-            <div>
-              <label className={labelCls}>Okno do</label>
-              <input
-                type="date"
-                value={windowEnd}
-                onChange={(e) => setWindowEnd(e.target.value)}
-                className={inputCls}
-              />
-            </div>
+          <div>
+            <label className={labelCls}>Časové okno</label>
+            <RangeCalendar
+              start={windowStart}
+              end={windowEnd}
+              min={today}
+              onChange={(s, e) => {
+                setWindowStart(s)
+                setWindowEnd(e)
+              }}
+            />
           </div>
 
           <div className="flex flex-wrap gap-2">

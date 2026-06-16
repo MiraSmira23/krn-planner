@@ -53,6 +53,25 @@ export default function EventPage() {
     setFocusedDate(dateStr)
   }
 
+  function handleMonthToggle(keys) {
+    setSaved(false)
+    setSelections((prev) => {
+      const allSet = keys.length > 0 && keys.every((k) => prev[k])
+      const next = { ...prev }
+      if (allSet) {
+        // Whole month already selected → clear it.
+        keys.forEach((k) => delete next[k])
+      } else {
+        // Fill the gaps with the default preference.
+        keys.forEach((k) => {
+          if (!next[k]) next[k] = 'great'
+        })
+      }
+      return next
+    })
+    setFocusedDate(null)
+  }
+
   function changePref(pref) {
     setSelections((prev) => ({ ...prev, [focusedDate]: pref }))
   }
@@ -141,6 +160,7 @@ export default function EventPage() {
                 selections={selections}
                 focusedDate={focusedDate}
                 onDayClick={handleDayClick}
+                onMonthToggle={handleMonthToggle}
               />
             </div>
 

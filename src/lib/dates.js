@@ -16,6 +16,45 @@ const MONTHS_GENITIVE = [
   'prosince',
 ]
 
+const MONTHS_NOMINATIVE = [
+  'leden',
+  'únor',
+  'březen',
+  'duben',
+  'květen',
+  'červen',
+  'červenec',
+  'srpen',
+  'září',
+  'říjen',
+  'listopad',
+  'prosinec',
+]
+
+// Czech weekday short labels, Monday first.
+export const WEEKDAYS_SHORT = ['po', 'út', 'st', 'čt', 'pá', 'so', 'ne']
+
+// Short month labels for compact pickers.
+export const MONTHS_SHORT = [
+  'led',
+  'úno',
+  'bře',
+  'dub',
+  'kvě',
+  'čvn',
+  'čvc',
+  'srp',
+  'zář',
+  'říj',
+  'lis',
+  'pro',
+]
+
+// Human label for a month, e.g. "červenec 2026".
+export function formatMonth(year, monthIndex) {
+  return `${MONTHS_NOMINATIVE[monthIndex]} ${year}`
+}
+
 export function parseDate(str) {
   const [y, m, d] = str.split('-').map(Number)
   return new Date(y, m - 1, d)
@@ -55,6 +94,12 @@ export function isWeekend(str) {
 export function formatDay(str) {
   const d = parseDate(str)
   return `${d.getDate()}. ${MONTHS_GENITIVE[d.getMonth()]}`
+}
+
+// Human label for a single day including the year, e.g. "12. července 2026".
+export function formatDayLong(str) {
+  const d = parseDate(str)
+  return `${d.getDate()}. ${MONTHS_GENITIVE[d.getMonth()]} ${d.getFullYear()}`
 }
 
 // Human label for a span of consecutive days.
