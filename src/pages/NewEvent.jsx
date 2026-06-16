@@ -18,6 +18,7 @@ export default function NewEvent() {
   const [title, setTitle] = useState('')
   const [type, setType] = useState('single_day')
   const [durationDays, setDurationDays] = useState(3)
+  const [weekendOnly, setWeekendOnly] = useState(false)
   const [windowStart, setWindowStart] = useState('')
   const [windowEnd, setWindowEnd] = useState('')
   const [saving, setSaving] = useState(false)
@@ -43,6 +44,7 @@ export default function NewEvent() {
       title: title.trim(),
       type,
       duration_days: type === 'multi_day' ? Number(durationDays) : 1,
+      weekend_only: type === 'single_day' ? weekendOnly : false,
       window_start: windowStart,
       window_end: windowEnd,
       created_at: new Date().toISOString(),
@@ -108,6 +110,18 @@ export default function NewEvent() {
                 className={inputCls}
               />
             </div>
+          )}
+
+          {type === 'single_day' && (
+            <label className="flex cursor-pointer items-center gap-2.5 text-[13px] text-[#b8b4d0]">
+              <input
+                type="checkbox"
+                checked={weekendOnly}
+                onChange={(e) => setWeekendOnly(e.target.checked)}
+                className="h-4 w-4 accent-[#7c6fe0]"
+              />
+              Jen víkend (so/ne)
+            </label>
           )}
 
           <div>

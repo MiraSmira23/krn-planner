@@ -1,4 +1,4 @@
-import { eachDate, parseDate, addDays, formatRange } from './dates'
+import { eachDate, parseDate, addDays, formatRange, isWeekend } from './dates'
 
 export const PREF_SCORE = { great: 3, ok: 1, hard_no: -5 }
 
@@ -146,6 +146,8 @@ export function rankResults(event) {
     // single_day / evening / lunch
     for (const date of eachDate(window_start, window_end)) {
       if (!allSelected.has(date)) continue
+      // Full-day single events can be restricted to weekends.
+      if (type === 'single_day' && event.weekend_only && !isWeekend(date)) continue
       candidates.push(
         buildResult([date], event, names, (dates) =>
           scoreDay(dates[0], availabilities, names)
